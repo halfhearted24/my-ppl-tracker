@@ -1,0 +1,15 @@
+{
+  "id": "./",
+  "name": "My PPL – 12 Week Workout Tracker",
+  "short_name": "My PPL",
+  "description": "Personal offline PPL workout tracker with progress and backup tools.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f3f6fa",
+  "theme_color": "#142f50",
+  "icons": [
+    {"src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable"}
+  ]
+}
