@@ -34,7 +34,7 @@ input[type=checkbox]{width:20px;height:20px;accent-color:var(--green)}
 .daytile b{display:block;font-size:13px}.daytile.active{border:2px solid var(--navy);background:var(--blue)}.daytile.done{background:var(--greenbg);border-color:#b9dec8}
 .exercise{border:1px solid var(--line);border-radius:14px;padding:12px;margin:10px 0;background:white}
 .exercise.complete{border-color:#9ccdb0;background:#f6fbf7}
-.exmeta{font-size:12px;color:var(--muted);margin-top:3px}.setrow{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.setrow input{text-align:center;padding:10px 4px}
+.exmeta{font-size:13px;color:var(--ink);font-weight:700;margin-top:5px}.setlabel{font-size:11px;color:var(--muted);font-weight:600;margin:0 0 5px}.setrow{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:8px}.setcell{background:#f6f8fb;border:1px solid #e8edf3;border-radius:11px;padding:8px}.setcell label{font-size:11px;font-weight:600;text-align:center;margin:0 0 5px;color:#506073}.setrow input{text-align:center;padding:10px 4px;font-size:17px;font-weight:700}.sethint{font-size:10px;color:var(--muted);text-align:center;margin-top:3px}
 .checkline{display:flex;align-items:center;gap:8px;margin-top:10px}.checkline label{margin:0;font-size:13px;color:var(--ink)}
 .tip{border:1px solid #f0dfb4;background:#fff9e9;padding:11px;border-radius:13px;font-size:13px}
 .good{border:1px solid #cce6d5;background:#f3faf5;padding:11px;border-radius:13px;font-size:13px}
@@ -74,7 +74,7 @@ ul.cues{margin:8px 0 0;padding-left:18px;color:#4f5f70;font-size:12px}
 </section>
 
 <section id="plan" class="hidden">
-<div class="card"><h2>Weekly schedule</h2><p class="muted">Repeat this sequence for 12 weeks. Forearm work is placed after leg training on Wednesday and Saturday so it is fresher than after pulling days. Choose a day on Today to log it.</p><div id="planList"></div></div>
+<div class="card"><h2>Weekly schedule</h2><p class="muted">Fixed weekly sequence: Monday Push A through Saturday Legs B; Sunday is always Recovery. Sessions are designed for about 45 minutes including a brief warm-up. Pair non-competing accessory exercises where practical; rest 60–90 seconds after most sets and 90–120 seconds after demanding compound sets.</p><div id="planList"></div></div>
 <div class="card"><h2>12-week training progression</h2>
 <div class="grid2">
 <div class="stat"><strong>Weeks 1–3</strong><span>Learn form and establish baseline</span></div>
@@ -85,7 +85,7 @@ ul.cues{margin:8px 0 0;padding-left:18px;color:#4f5f70;font-size:12px}
 <div class="stat"><strong>Week 12</strong><span>Review progress and technique</span></div>
 </div>
 <p class="muted">Deload weeks: keep the exercises, reduce working sets, and finish comfortably away from failure. Do not force progression when fatigued or sore.</p></div>
-<div class="tip"><b>Equipment notes:</b> Use a secure band anchor. If you do not have a safe overhead anchor, replace band pulldowns with a one-arm band row anchored securely at chest height. No bench is required.</div>
+<div class="tip"><b>Equipment notes:</b> Equipment: adjustable incline bench, straight barbell and EZ bar with limited plates, 5 kg dumbbells, and door-anchor resistance bands. No squat rack: do not perform barbell back squats or incline barbell bench presses. Use a safe setup for floor press, RDL and hip thrust. Start lateral and rear-delt work with light band tension; stop for shoulder pain.</div>
 </section>
 
 <section id="progress" class="hidden">
@@ -118,57 +118,53 @@ const weekdays=["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
 const sessions=["Push A","Pull A","Legs A","Push B","Pull B","Legs B","Recovery"];
 const exercises={
 "Push A":[
-["Dumbbell Floor Press",3,10,20,"Middle chest","Keep elbows 30–45° from torso; pause gently when upper arms meet floor."],
-["Low-to-High Band Fly",2,12,20,"Upper-chest bias","Anchor low behind you; sweep hands up and inward. Do not overstretch."],
-["High-to-Low Band Fly",2,12,20,"Lower-chest bias","Anchor high securely; bring hands down toward lower chest."],
-["Band Triceps Pushdown",3,12,20,"Triceps","Keep elbows close to sides; move only forearms."],
-["Lying EZ-Bar Triceps Extension",2,10,15,"Triceps","Use a comfortable elbow path; lower slowly."],
-["Dumbbell Lateral Raise",3,12,25,"Side delts","Raise in a slightly forward plane; stop before shoulder discomfort."]
+["Incline Band Chest Press",3,10,15,"Upper chest","Set bench around 30 degrees. Anchor band low behind you; press forward and slightly upward. Keep shoulders comfortable."],
+["Low-to-High Band Fly",2,12,20,"Upper-chest bias","Anchor low behind you; sweep hands upward and inward without overstretching."],
+["Single-Arm Band Lateral Raise",3,12,20,"Lateral deltoid","Anchor low. Stand sideways, raise slightly forward of your torso and stop at a comfortable height. Lower for 2–3 seconds."],
+["Close-Grip Incline Push-Up",2,8,15,"Triceps and chest","Hands on stable bench, elbows close but not pinned. Use a pain-free range."],
+["Overhead Band Triceps Extension",2,10,20,"Triceps long-head emphasis","Anchor low behind you; face away and extend overhead only if shoulder remains comfortable. Otherwise substitute band pushdown."]
 ],
 "Pull A":[
-["Single-Arm Dumbbell Row",3,10,20,"Lats","Brace with free hand on thigh; pull elbow toward hip."],
-["Band Lat Pulldown (secure high anchor)",3,12,20,"Back width","Pull elbows down toward ribs. If no safe high anchor, do band rows."],
-["EZ-Bar Bent-Over Row",2,10,15,"Mid-back","Hinge at hips; keep spine neutral and row toward lower ribs."],
-["Band Face Pull",2,15,20,"Rear delts / upper back","Pull toward face with elbows out; use light tension."],
-["EZ-Bar Biceps Curl",3,10,15,"Biceps","Keep elbows near sides; avoid swinging."],
-["Dumbbell Hammer Curl",2,10,15,"Brachialis / forearms","Keep palms facing each other."]
+["Kneeling Band Lat Pulldown",3,10,15,"Lat width","Anchor at top of secure door. Kneel facing door; pull elbows down toward sides without leaning back."],
+["Barbell Bent-Over Row",3,8,12,"Lats and mid-back","Hinge at hips, brace trunk and row toward lower ribs. Use a load you can control."],
+["Single-Arm Band Rear-Delt Fly",2,12,20,"Rear deltoid","Anchor at chest height. Face the door and move arm out and slightly back; stop around torso line. Use light tension."],
+["EZ-Bar Biceps Curl",3,8,15,"Biceps brachii","Keep upper arms near sides; avoid swinging and lower under control."],
+["Band Hammer Curl",2,12,20,"Brachialis and brachioradialis","Anchor low; neutral grip with palms facing each other. Keep elbows still."]
 ],
 "Legs A":[
-["Dumbbell Goblet Squat",3,10,20,"Quadriceps","Brace trunk; use a pain-free depth and keep feet planted."],
-["Reverse Lunge",2,8,12,"Quads / glutes","Step back under control; use support if balance is limited."],
-["Dumbbell Romanian Deadlift",3,10,15,"Hamstrings","Push hips back; keep dumbbells close to legs."],
-["Glute Bridge",2,12,20,"Glutes","Ribs down; squeeze glutes without arching lower back."],
-["Standing Calf Raise",3,12,25,"Calves","Pause at top and lower under control."],
-["Farmer’s Carry",2,30,45,"Grip, forearms and trunk","Hold both dumbbells at your sides; stand tall, brace your trunk and walk steadily. Log seconds for each round."],
-["Dumbbell Wrist Curl",2,12,20,"Wrist flexors / forearm thickness","Rest forearms on thighs, palms up; curl wrists slowly through a comfortable range."]
+["Reverse Lunge",3,8,12,"Glutes and quadriceps","Start bodyweight; step back, keep front foot planted and use a stable support if needed. Progress to 5 kg dumbbells only when controlled."],
+["Band Leg Extension",3,12,20,"Quadriceps","Secure low anchor around ankle; extend knee smoothly without snapping into lockout."],
+["Lateral Lunge",2,8,12,"Adductors and glutes","Step sideways, sit hips back over bent leg and keep other leg long. Use bodyweight first."],
+["Standing Calf Raise",3,12,20,"Gastrocnemius","Use stable support; pause at top and lower slowly."],
+["Barbell Wrist Curl",2,12,20,"Wrist flexors","Rest forearms on thighs or bench; move wrists only through comfortable range."],
+["Pallof Press",2,10,15,"Core anti-rotation","Anchor band at chest height; stand sideways and press hands forward without rotating trunk."]
 ],
 "Push B":[
-["Dumbbell Lateral Raise",3,12,25,"Side delts","Use a comfortable range; no swinging."],
-["Single-Arm Band Lateral Raise",2,12,25,"Side delts","Stand on band; keep tension smooth and light."],
-["Dumbbell Floor Press (neutral grip)",3,10,20,"Chest","Palms facing each other if more comfortable for shoulder."],
-["Band Chest Press",2,12,20,"Chest","Anchor behind at chest height; avoid painful range."],
-["Band Triceps Pushdown",3,12,20,"Triceps","Shoulder-friendly triceps option; keep upper arms still."],
-["Lying EZ-Bar Triceps Extension",2,10,15,"Triceps","Skip if elbow or shoulder discomfort; do extra pushdowns instead."]
+["Barbell Floor Press",3,8,12,"Chest and triceps","Use a manageable load; lower until upper arms gently meet floor. No rack required; set up safely."],
+["High-to-Low Band Fly",2,12,20,"Lower-chest bias","Anchor high behind you; bring hands down and inward. Avoid shoulder stretch or pain."],
+["Leaning Single-Arm Band Lateral Raise",3,12,20,"Lateral deltoid","Low anchor. Hold stable support with free hand, lean slightly away and raise in scapular plane."],
+["Band Triceps Pushdown",3,10,20,"Triceps lateral and medial-head emphasis","Anchor high; keep elbows near sides and extend without shoulder movement."]
 ],
 "Pull B":[
-["EZ-Bar Bent-Over Row",3,10,15,"Mid-back thickness","Hinge steadily; pull toward lower ribs."],
-["Single-Arm Dumbbell Row",3,10,20,"Lats","Drive elbow toward hip; avoid twisting torso."],
-["Band Seated Row",2,12,20,"Mid-back","Anchor band securely at foot level; sit tall."],
-["Band Reverse Fly",2,12,20,"Rear delts","Use light tension; open arms without shrugging."],
-["EZ-Bar Reverse Curl",2,10,15,"Brachioradialis","Use a comfortable wrist position."],
-["EZ-Bar Biceps Curl",2,10,15,"Biceps","Control lowering; no body swing."]
+["Band Wide-Elbow High Row",3,10,15,"Rhomboids and middle trapezius","Anchor around chest/upper-chest height; pull toward upper chest with elbows comfortably out."],
+["Straight-Arm Band Pulldown",2,12,20,"Latissimus dorsi","Anchor high; keep elbows softly bent and sweep hands toward thighs without leaning."],
+["Band Face Pull",2,12,20,"Rear delts and mid/lower traps","Anchor around eye level; pull toward face without shrugging or forcing shoulder rotation."],
+["Barbell Shrug",2,10,15,"Upper trapezius","Hold bar securely; elevate shoulders straight up, pause, then lower. Do not roll shoulders."],
+["Incline Dumbbell Curl",2,10,15,"Biceps at longer muscle length","Bench around 45–60 degrees. Use 5 kg only if lowering is controlled; otherwise use lighter band curl."],
+["Band Concentration-Style Curl",2,12,20,"Biceps with shoulder flexed","Anchor low; sit and brace upper arm against inner thigh. Curl without moving upper arm."],
+["EZ-Bar Reverse Curl",2,10,15,"Brachioradialis and brachialis","Use comfortable pronated grip; wrists straight, no swinging."]
 ],
 "Legs B":[
-["Dumbbell Romanian Deadlift",3,10,15,"Hamstrings","Hinge at hips; stop when hamstrings limit range."],
-["Reverse Lunge or Supported Split Squat",2,8,12,"Quads / glutes","Choose the stable, pain-free variation."],
-["Dumbbell Sumo Squat",2,10,20,"Adductors / glutes","Comfortable stance; knees track with toes."],
-["Floor Glute Bridge",3,12,20,"Glutes","Pause at top; avoid overextending lower back."],
-["Band Leg Curl",2,12,20,"Hamstrings","Anchor safely; curl smoothly."],
-["Standing Calf Raise",3,12,25,"Calves","Full comfortable range; pause at top."],
-["Dumbbell Reverse Wrist Curl",2,12,20,"Wrist extensors / upper forearm","Rest forearms on thighs, palms down; lift the backs of your hands without swinging."],
-["Suitcase Carry",2,30,45,"Grip, obliques and anti-lateral-flexion","Hold one dumbbell at your side; walk tall without leaning. Complete both sides; log seconds per side."]
+["Barbell Romanian Deadlift",3,8,12,"Hamstrings and glutes","Soft knees, push hips back, keep bar close and stop when hamstrings limit range."],
+["Barbell Hip Thrust",3,10,15,"Gluteus maximus","Use secure bench support and padding across hips. Set bar in place safely; avoid arching lower back at top."],
+["Lying Band Leg Curl",2,12,20,"Hamstrings","Anchor low and secure band to ankle; curl smoothly without lifting hips."],
+["Standing Band Hip Abduction",2,12,20,"Gluteus medius","Anchor low; move leg outward without leaning trunk."],
+["Seated Calf Raise",2,12,20,"Soleus","Knees bent; place manageable load securely on thighs or use band resistance."],
+["Reverse Wrist Curl",2,12,20,"Wrist extensors","Forearms supported, palms down; lift backs of hands without swinging."],
+["Barbell Static Hold",2,20,40,"Grip and finger flexors","Hold a safely loaded bar at sides; stand tall. Stop before grip failure affects posture."],
+["Dead Bug",2,8,12,"Core anti-extension","Keep lower back gently controlled against floor; move opposite arm and leg slowly."]
 ]};
-const focus={"Push A":"Chest focus · middle, upper and lower-chest bias","Pull A":"Back width · lats, mid-back, rear delts and biceps","Legs A":"Quadriceps focus · quads, hamstrings, glutes, calves and forearms","Push B":"Side delts and chest · shoulder-friendly pressing","Pull B":"Back thickness · mid-back, lats and arms","Legs B":"Hamstrings and glutes focus · forearm extensors and functional grip"};
+const focus={"Push A":"Upper chest · lateral delts · triceps long-head emphasis","Pull A":"Lat width · rear delts · biceps and brachialis","Legs A":"Quadriceps · glutes · calves · forearms · core","Push B":"Chest · lateral delts · triceps lateral/medial emphasis","Pull B":"Upper-back thickness · lats · rear delts · biceps and brachioradialis","Legs B":"Hamstrings · glutes · calves · forearms · core"};
 let state={start:"2026-11-16",logs:{},weekly:{}},selected=0;
 const $=id=>document.getElementById(id);
 function setSaveStatus(label, detail, good=false){
@@ -254,7 +250,7 @@ weekdays.forEach((day,i)=>{let tileDate=getDate((w-1)*7+i);let b=document.create
 let panel=$("workoutPanel");panel.innerHTML="";
 if(s==="Recovery"){panel.innerHTML='<div class="card"><h2>Recovery day</h2><p class="muted">Easy walking, gentle mobility and rest. No hard resistance training.</p><label>Post-lunch walk (minutes)</label><input id="lunchWalk" type="number" min="0" max="240" inputmode="numeric" placeholder="e.g. 10–15" value="'+(l.lunchWalk??"")+'"><label>Post-dinner walk (minutes)</label><input id="dinnerWalk" type="number" min="0" max="240" inputmode="numeric" placeholder="Optional" value="'+(l.dinnerWalk??"")+'"><label>Recovery notes</label><textarea id="dayNotes" rows="3" placeholder="Energy, soreness, steps..."></textarea><button class="primary full" id="saveDayNotes" style="margin-top:8px">Save notes</button></div>';$("dayNotes").value=l.notes||"";["lunchWalk","dinnerWalk"].forEach(id=>$(id).addEventListener("input",e=>{l[id]=e.target.value===""?"":Number(e.target.value);save();}));$("saveDayNotes").onclick=()=>{l.notes=$("dayNotes").value;save();};syncPicker();return;}
 let box=document.createElement("div");box.className="card";let items=exercises[s];
-box.innerHTML='<div class="row"><div><h2>'+s+'</h2><div class="muted">'+focus[s]+'</div></div><span class="pill">'+items.length+' exercises</span></div><div class="tip small">'+(deload(w)?"Deload week: reduced sets. Keep reps comfortable; do not chase records.":"Work with 1–3 reps in reserve. Stop if pain changes your movement.")+'</div><div id="exerciseList"></div><label>Post-lunch walk (minutes)</label><input id="lunchWalk" type="number" min="0" max="240" inputmode="numeric" placeholder="e.g. 10–15" value="'+(l.lunchWalk??"")+'"><label>Post-dinner walk (minutes)</label><input id="dinnerWalk" type="number" min="0" max="240" inputmode="numeric" placeholder="Optional" value="'+(l.dinnerWalk??"")+'"><label>Session notes</label><textarea id="dayNotes" rows="2" placeholder="Energy, technique, discomfort..."></textarea><div class="checkline"><input type="checkbox" id="finishDay"><label for="finishDay"><b>Mark workout complete</b></label></div>';
+box.innerHTML='<div class="row"><div><h2>'+s+'</h2><div class="muted">'+focus[s]+'</div></div><span class="pill">'+items.length+' exercises</span></div><div class="tip small">'+(deload(w)?"Deload week: reduced sets. Keep reps comfortable; do not chase records.":"Warm up for 4–5 minutes. Work with 2–3 reps in reserve (RIR) on most sets. Rest 60–90 seconds for isolation work and 90–120 seconds for demanding compound work. To fit 45 minutes, pair non-competing accessories (for example lateral raises with triceps work). Stop if pain changes your movement.")+'</div><div id="exerciseList"></div><label>Post-lunch walk (minutes)</label><input id="lunchWalk" type="number" min="0" max="240" inputmode="numeric" placeholder="e.g. 10–15" value="'+(l.lunchWalk??"")+'"><label>Post-dinner walk (minutes)</label><input id="dinnerWalk" type="number" min="0" max="240" inputmode="numeric" placeholder="Optional" value="'+(l.dinnerWalk??"")+'"><label>Session notes</label><textarea id="dayNotes" rows="2" placeholder="Energy, technique, discomfort..."></textarea><div class="checkline"><input type="checkbox" id="finishDay"><label for="finishDay"><b>Mark workout complete</b></label></div>';
 panel.appendChild(box);$("dayNotes").value=l.notes||"";$("finishDay").checked=l.done;
 ["lunchWalk","dinnerWalk"].forEach(id=>$(id).addEventListener("input",e=>{l[id==="lunchWalk"?"lunchWalk":"dinnerWalk"]=e.target.value===""?"":Number(e.target.value);save();}));
 $("dayNotes").addEventListener("input",e=>{l.notes=e.target.value;save();});
@@ -264,8 +260,8 @@ items.forEach((item,idx)=>{
 let [name,base,min,max,target,cue]=item;let sets=actualSets(base,w),entry=l.ex[name]||{},old=prior(selected,name);
 let el=document.createElement("div");el.className="exercise"+(entry.checked?" complete":"");
 let previous=old?"Last time: "+old.reps.map((v,i)=>"S"+(i+1)+" "+(v||"—")).join(" · ")+(old.load?" · "+old.load:""):"No previous log yet";
-let timed=/Carry/.test(name);let repHTML="";for(let j=0;j<sets;j++)repHTML+='<div><label>Set '+(j+1)+' · '+(timed?'seconds':'reps')+'</label><input data-rep="'+j+'" type="number" min="0" max="300" inputmode="numeric" placeholder="'+min+'–'+max+'" value="'+(entry.reps?.[j]??"")+'"></div>';
-el.innerHTML='<div class="rowstart"><div><h3>'+(idx+1)+'. '+name+'</h3><div class="exmeta">'+target+' · '+sets+' sets × '+min+'–'+max+' reps</div></div><span class="pill">'+(entry.checked?"Logged":"To log")+'</span></div><p class="muted">'+previous+'</p><details><summary class="tiny">Technique cue</summary><p class="small">'+cue+'</p></details><div class="setrow">'+repHTML+'</div><label>Load / band setup</label><input data-load value="'+(entry.load||"")+'" placeholder="e.g. 5 kg each / blue band"><div class="grid2"><div><label>RIR after last set</label><select data-rir><option value="">Choose</option>'+[0,1,2,3,4,5].map(v=>'<option value="'+v+'" '+(String(entry.rir??"")===String(v)?"selected":"")+'>'+v+'</option>').join("")+'</select></div><div><label>Exercise status</label><select data-status><option value="no" '+(!entry.checked?"selected":"")+'>Not done</option><option value="yes" '+(entry.checked?"selected":"")+'>Completed</option><option value="modified" '+(entry.modified?"selected":"")+'>Modified</option></select></div></div>';
+let timed=/Carry/.test(name);let repHTML="";for(let j=0;j<sets;j++)repHTML+='<div class="setcell"><label for="rep-'+idx+'-'+j+'">Set '+(j+1)+'</label><input id="rep-'+idx+'-'+j+'" data-rep="'+j+'" type="number" min="0" max="300" inputmode="numeric" placeholder="'+min+'–'+max+'" value="'+(entry.reps?.[j]??"")+'"><div class="sethint">'+(timed?'seconds':'reps completed')+'</div></div>';
+el.innerHTML='<div class="rowstart"><div><h3>'+(idx+1)+'. '+name+'</h3><div class="exmeta">Target: '+sets+' × '+min+'–'+max+(timed?' sec':' reps')+'</div></div><span class="pill">'+(entry.checked?"Logged":"To log")+'</span></div><p class="setlabel">YOUR PERFORMANCE · ENTER ACTUAL '+(timed?'SECONDS':'REPS')+' FOR EACH SET</p><div class="setrow">'+repHTML+'</div><p class="muted">'+previous+'</p><details><summary class="tiny">Technique cue</summary><p class="small">'+cue+'</p></details><label>Load / band setup</label><input data-load value="'+(entry.load||"")+'" placeholder="e.g. 5 kg each / blue band"><div class="grid2"><div><label>RIR after last set</label><select data-rir><option value="">Choose</option>'+[0,1,2,3,4,5].map(v=>'<option value="'+v+'" '+(String(entry.rir??"")===String(v)?"selected":"")+'>'+v+'</option>').join("")+'</select></div><div><label>Exercise status</label><select data-status><option value="no" '+(!entry.checked?"selected":"")+'>Not done</option><option value="yes" '+(entry.checked?"selected":"")+'>Completed</option><option value="modified" '+(entry.modified?"selected":"")+'>Modified</option></select></div></div>';
 el.querySelectorAll("[data-rep]").forEach(inp=>inp.addEventListener("input",()=>{let e=l.ex[name]||(l.ex[name]={});e.reps=e.reps||[];e.reps[+inp.dataset.rep]=inp.value===""?"":Number(inp.value);save();}));
 el.querySelector("[data-load]").addEventListener("input",e=>{(l.ex[name]||(l.ex[name]={})).load=e.target.value;save();});
 el.querySelector("[data-rir]").addEventListener("change",e=>{(l.ex[name]||(l.ex[name]={})).rir=e.target.value;save();});
